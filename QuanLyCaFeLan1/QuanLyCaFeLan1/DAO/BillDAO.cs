@@ -44,5 +44,28 @@ namespace QuanLyCaFeLan1.DAO
             }
             return -1;
         }
+        public void CheckOut(int id,int discount)
+        {
+            string query = "update dbo.Bill set status = 1, " + "discount = " + discount + "where id = " + id;
+            DataProvider.Instance.ExcuteNonQuery(query);
+        }
+
+        public void InsertBill(int id)
+        {
+            DataProvider.Instance.ExcuteNonQuery("exec USP_InsertBill @idTable", new object[] { id });
+        }
+
+        public int GetMaxIDBill()
+        {
+            try
+            {
+
+            return (int)DataProvider.Instance.ExcuteScalar("select Max(id) from dbo.Bill");
+            }
+            catch
+            {
+                return 1;
+            }
+        }
     }
 }
