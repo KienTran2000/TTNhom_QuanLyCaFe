@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using QuanLyCaFeLan1.DAO;
+using QuanLyCaFeLan1.DTO;
 namespace QuanLyCaFeLan1
 {
     public partial class fLogin : Form
@@ -23,7 +24,8 @@ namespace QuanLyCaFeLan1
             string passWord = txbPassWord.Text;
             if (Login(userName,passWord))
             {
-                fTableManager f = new fTableManager();
+                Account loginAccount = AccountDAO.Instance.GetAccountByUserName(userName);
+                fTableManager f = new fTableManager(loginAccount);
                 this.Hide();
                 f.ShowDialog();//chi thao tac tren dialog, chi xu ly tren manager,khi no tat di thi login moi hien len
                 this.Show();

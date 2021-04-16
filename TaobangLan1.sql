@@ -350,3 +350,36 @@ go
 drop proc USP_SwitchTabel
 
 update TableFood set status=N'Trống'
+
+delete dbo.BillInfo
+delete dbo.Bill
+
+
+--Thong ke danh sach doanh thu trong phan Admin
+create proc USP_GetListBillByDate @checkIn date,@checkOut date 
+as
+begin
+select t.name as [Tên bàn],b.totalPrice as [Tổng tiền],DateCheckIn as [Ngày vào],DateCheckOut as [Ngày ra],discount as [Giảm giá]
+from dbo.Bill as b,dbo.TableFood as t
+where DateCheckIn >=@checkIn and DateCheckOut<=@checkOut and b.status=1
+and t.id=b.idTable
+end
+go
+
+--Cập nhật lại tài khoản
+create proc USP_UpdateAccount @userName nvarchar(100),@displayName nvarchar(100),@password nvarchar(100),@newPassword nvarchar(100)
+as
+begin
+	declare @isRightPass int=0
+	select @isRightPass = count(*) from dbo.Account where UserName =@userName and PassWord=@password
+	if(@isRightPass=1)
+	begin
+		if(@newPassword=null or @newPassword='')
+			begin
+				update dbo.Account set DisplayName =@displayName where UserName=@userName
+			end
+		else
+				update dbo.Account set DisplayName =@displayName,PassWord=@newPassword where UserName=@userName
+	end
+end
+go
