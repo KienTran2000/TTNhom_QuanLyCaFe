@@ -72,7 +72,7 @@ CREATE TABLE BillInfo
 	FOREIGN KEY (idFood) REFERENCES  dbo.Food(id)
 )
 GO
--------------------------------------------------------------------------------------------------------------------------------------------
+--=================================================================INSERT DATA====================================================================-------
 
 INSERT INTO dbo.Account
 (
@@ -112,7 +112,7 @@ GO
 EXEC USP_GetAccountByUserName N'admin'
 
 SELECT * FROM DBO.Account WHERE UserName = N'ADMIN' AND PassWord =N'1'
-
+-------------------------------------------------------------------------------------------------
 CREATE PROC USP_Login @userName nvarchar(100), @passWord nvarchar(100)
 AS
 BEGIN
@@ -132,50 +132,66 @@ END
 CREATE PROC USP_GetTableList
 AS SELECT * FROM dbo.TableFood
 GO
-
+--UPDATE trạng thái bàn
 UPDATE DBO.TableFood SET status = N'Có người' WHERE id=9
 EXEC dbo.USP_GetTableList
---Thêm Category--
+
+--Thêm Category(Loại)--
 INSERT DBO.FoodCategory
 		(name)
-VALUES	(N'Hải sản')
+VALUES	(N'Trà')
 
 INSERT DBO.FoodCategory
 		(name)
-VALUES	(N'Nông sản')
+VALUES	(N'Cafe')
 
 INSERT DBO.FoodCategory
 		(name)
-VALUES	(N'Lâm sản')
+VALUES	(N'Sinh Tố')
 
 INSERT DBO.FoodCategory
 		(name)
-VALUES	(N'Quý hiếm')
+VALUES	(N'Đồ ăn nhẹ')
 
 INSERT DBO.FoodCategory
 		(name)
 VALUES	(N'Nước')
 --Thêm món ăn--
 INSERT DBO.Food(name,idCategory,price)
-VALUES	(N'Mực một nắng nướng sa tế',1,120000)
+VALUES	(N'Trà Đào Cam Sả',6,120000)
 
 INSERT DBO.Food(name,idCategory,price)
-VALUES	(N'Nghêu hấp xả',1,50000)
+VALUES	(N'Trà chanh đặc biệt',6,50000)
 
 INSERT DBO.Food(name,idCategory,price)
-VALUES	(N'Lầm dê nướng sữa',2,50000)
+VALUES	(N'Trà quất nha đam',6,50000)
 
 INSERT DBO.Food(name,idCategory,price)
-VALUES	(N'Mực một nắng nướng sa tế',3,75000)
+VALUES	(N'Nâu Đá',7,50000)
 
 INSERT DBO.Food(name,idCategory,price)
-VALUES	(N'Cơm chiên mushi',4,99000)
+VALUES	(N'Bạc xỉu',7,50000)
 
 INSERT DBO.Food(name,idCategory,price)
-VALUES	(N'Seven Up',5,12000)
+VALUES	(N'Cafe Sữa',7,50000)
 
 INSERT DBO.Food(name,idCategory,price)
-VALUES	(N'Cafe Nâu Đá',5,12000)
+VALUES	(N'Sinh tố Bơ',8,75000)
+
+INSERT DBO.Food(name,idCategory,price)
+VALUES	(N'Sinh tố xoài',8,99000)
+
+INSERT DBO.Food(name,idCategory,price)
+VALUES	(N'Gà khô lá chanh',9,12000)
+
+INSERT DBO.Food(name,idCategory,price)
+VALUES	(N'Heo khô cháy tỏi',9,12000)
+
+INSERT DBO.Food(name,idCategory,price)
+VALUES	(N'7 UP',10,12000)
+
+INSERT DBO.Food(name,idCategory,price)
+VALUES	(N'Bò Húc',10,12000)
 
 --thêm bill--
 INSERT dbo.Bill (DateCheckIn,DateCheckOut,idTable,status)
@@ -383,3 +399,49 @@ begin
 	end
 end
 go
+
+--Xóa Bill Info
+create trigger UTG_DeleteBillInfo on dbo.BillInfo for delete
+as
+begin
+	declare @idBillInfo int
+	declare @idBill int
+	select @idBillInfo = id, @idBill = deleted.idBill from deleted
+
+	declare @idTable int
+	select @idTable=idTable from dbo.Bill where id=@idBill
+
+	declare @count int =0
+	select @count=count(*) from dbo.BillInfo as bi, dbo.Bill as b where b.id =bi.idBill and b.id =@idBill and b.status=0
+
+	if(@count = 0)
+		update dbo.TableFood set status = N'Trống' where id=@idTable
+end
+go
+--Ham tim kiem 
+CREATE FUNCTION [dbo].[fuConvertToUnsign1] ( @strInput NVARCHAR(4000) ) RETURNS NVARCHAR(4000)
+AS
+BEGIN 
+	IF @strInput IS NULL RETURN @strInput 
+	IF @strInput = '' RETURN @strInput 
+	DECLARE @RT NVARCHAR(4000) 
+	DECLARE @SIGN_CHARS NCHAR(136) 
+	DECLARE @UNSIGN_CHARS NCHAR (136) 
+	SET @SIGN_CHARS = N'ăâđêôơưàảãạáằẳẵặắầẩẫậấèẻẽẹéềểễệế ìỉĩịíòỏõọóồổỗộốờởỡợớùủũụúừửữựứỳỷỹỵý ĂÂĐÊÔƠƯÀẢÃẠÁẰẲẴẶẮẦẨẪẬẤÈẺẼẸÉỀỂỄỆẾÌỈĨỊÍ ÒỎÕỌÓỒỔỖỘỐỜỞỠỢỚÙỦŨỤÚỪỬỮỰỨỲỶỸỴÝ' +NCHAR(272)+ NCHAR(208) SET @UNSIGN_CHARS = N'aadeoouaaaaaaaaaaaaaaaeeeeeeeeee iiiiiooooooooooooooouuuuuuuuuuyyyyy AADEOOUAAAAAAAAAAAAAAAEEEEEEEEEEIIIII OOOOOOOOOOOOOOOUUUUUUUUUUYYYYYDD'
+	DECLARE @COUNTER int 
+	DECLARE @COUNTER1 int 
+	SET @COUNTER = 1 
+	WHILE (@COUNTER <=LEN(@strInput)) 
+	BEGIN 
+		SET @COUNTER1 = 1 
+			WHILE (@COUNTER1 <=LEN(@SIGN_CHARS)+1)
+				BEGIN 
+					IF UNICODE(SUBSTRING(@SIGN_CHARS, @COUNTER1,1)) = UNICODE(SUBSTRING(@strInput,@COUNTER ,1) )
+						BEGIN 
+							IF @COUNTER=1 SET @strInput = SUBSTRING(@UNSIGN_CHARS, @COUNTER1,1) + SUBSTRING(@strInput, @COUNTER+1,LEN(@strInput)-1)
+							ELSE 
+								SET @strInput = SUBSTRING(@strInput, 1, @COUNTER-1) +SUBSTRING(@UNSIGN_CHARS, @COUNTER1,1) + SUBSTRING(@strInput, @COUNTER+1,LEN(@strInput)- @COUNTER) BREAK 
+						END
+						SET @COUNTER1 = @COUNTER1 +1 END 
+						SET @COUNTER = @COUNTER +1 END 
+						SET @strInput = replace(@strInput,' ','-') RETURN @strInput END
