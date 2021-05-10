@@ -236,6 +236,7 @@ SELECT * FROM DBO.Bill
 SELECT * FROM DBO.BillInfo
 SELECT * FROM dbo.Food
 SELECT * FROM dbo.FoodCategory
+
 --Insert BILL
 create proc USP_InsertBill
 @idTable int
@@ -445,3 +446,37 @@ BEGIN
 						SET @COUNTER1 = @COUNTER1 +1 END 
 						SET @COUNTER = @COUNTER +1 END 
 						SET @strInput = replace(@strInput,' ','-') RETURN @strInput END
+go
+
+create proc USP_GetListBillByDateAndPage @checkIn date,@checkOut date ,@page int
+as
+begin
+	DECLARE @pageRows INT = 10
+	DECLARE @selectRows INT = @pageRows
+	DECLARE @exceptRows INT = (@page - 1) * @pageRows
+	
+	;WITH BillShow AS( SELECT b.ID, t.name AS [Tên bàn], b.totalPrice AS [Tổng tiền], DateCheckIn AS [Ngày vào], DateCheckOut AS [Ngày ra], discount AS [Giảm giá]
+	FROM dbo.Bill AS b,dbo.TableFood AS t
+	WHERE DateCheckIn >= @checkIn AND DateCheckOut <= @checkOut AND b.status = 1
+	AND t.id = b.idTable)
+	
+	SELECT TOP (@selectRows) * FROM BillShow WHERE id NOT IN (SELECT TOP (@exceptRows) id FROM BillShow)
+
+end
+go
+drop proc USP_GetListBillByDateAndPage
+
+
+
+create proc USP_GetNumBillByDate @checkIn date,@checkOut date 
+as
+begin
+	SELECT COUNT(*)
+	FROM dbo.Bill AS b,dbo.TableFood AS t
+	WHERE DateCheckIn >= @checkIn AND DateCheckOut <= @checkOut AND b.status = 1
+	AND t.id = b.idTable
+end
+go
+
+drop proc USP_GetNumBillByDate
+

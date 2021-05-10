@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fAccountProfile));
             this.panel2 = new System.Windows.Forms.Panel();
             this.txbUserName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -203,25 +204,37 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(460, 472);
+            this.btnUpdate.BackColor = System.Drawing.Color.Orange;
+            this.btnUpdate.Font = new System.Drawing.Font("Times New Roman", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdate.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnUpdate.Image = global::QuanLyCaFeLan1.Properties.Resources.reset_30px;
+            this.btnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnUpdate.Location = new System.Drawing.Point(388, 472);
             this.btnUpdate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(118, 62);
+            this.btnUpdate.Size = new System.Drawing.Size(148, 62);
             this.btnUpdate.TabIndex = 6;
             this.btnUpdate.Text = "Cập nhật";
-            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnUpdate.UseVisualStyleBackColor = false;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnExit
             // 
+            this.btnExit.BackColor = System.Drawing.Color.Orange;
             this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnExit.Location = new System.Drawing.Point(588, 472);
+            this.btnExit.Font = new System.Drawing.Font("Times New Roman", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnExit.Image = global::QuanLyCaFeLan1.Properties.Resources.logout_new_30px;
+            this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnExit.Location = new System.Drawing.Point(559, 472);
             this.btnExit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(118, 62);
+            this.btnExit.Size = new System.Drawing.Size(147, 62);
             this.btnExit.TabIndex = 7;
             this.btnExit.Text = "Thoát";
-            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnExit.UseVisualStyleBackColor = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // fAccountProfile
@@ -238,10 +251,11 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "fAccountProfile";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "thông Tin Cá Nhân";
+            this.Text = "Thông Tin Cá Nhân";
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);

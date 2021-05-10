@@ -47,10 +47,15 @@ namespace QuanLyCaFeLan1
 
         private void fLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(MessageBox.Show("Bạn có thực sự muốn thoát","Thông báo",MessageBoxButtons.OKCancel) != System.Windows.Forms.DialogResult.OK)
+            if(MessageBox.Show("Bạn có thực sự muốn thoát","Thông báo",MessageBoxButtons.OKCancel,MessageBoxIcon.Warning) != System.Windows.Forms.DialogResult.OK)
             {
                 e.Cancel = true;
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

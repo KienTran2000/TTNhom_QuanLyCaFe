@@ -44,6 +44,7 @@ namespace QuanLyCaFeLan1
             cbCategory.DataSource = listCategory;
             cbCategory.DisplayMember = "Name";
         }
+
         void LoadFoodListByCategoryID(int id)
         {
             List<Food> listFood = FoodDAO.Instance.GetFoodByCategoryID(id);
@@ -64,10 +65,10 @@ namespace QuanLyCaFeLan1
                 switch (item.Status)
                 {
                     case "Trống":
-                        btn.BackColor = Color.Aqua;
+                        btn.BackColor = Color.Aquamarine;
                         break;
                     default:
-                        btn.BackColor = Color.LightPink;
+                        btn.BackColor = Color.Red;
                         break;
                 }
                 flbTable.Controls.Add(btn);
@@ -129,8 +130,54 @@ namespace QuanLyCaFeLan1
             f.InsertFood += f_InsertFood;
             f.DeleteFood += f_DeleteFood;
             f.UpdateFood += f_UpdateFood;
+            f.DeleteCategory += f_DeleteCategory;
+            f.UpdateCategory += f_UpdateCategory;
+            f.InsertCategory += f_InsertCategory;
+            f.DeleteTable += f_DeleteTable;
+            f.UpdateTable += f_UpdateTable;
+            f.InsertTable += f_InsertTable;
             f.ShowDialog();
         }
+        void f_InsertCategory(object sender,EventArgs e)
+        {
+            LoadCategory();
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
+        }
+        void f_DeleteCategory(object sender,EventArgs e)
+        {
+            LoadCategory();
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
+            LoadTable();
+        }
+        void f_UpdateCategory(object sender,EventArgs e)
+        {
+            LoadCategory();
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
+        }
+
+        void f_InsertTable(object sender, EventArgs e)
+        {
+            LoadTable();
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
+        }
+        void f_DeleteTable(object sender, EventArgs e)
+        {
+            LoadTable();
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
+            LoadTable();
+        }
+        void f_UpdateTable(object sender, EventArgs e)
+        {
+            LoadTable();
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
+        }
+
         void f_InsertFood(object sender,EventArgs e)
         {
             LoadFoodListByCategoryID((cbCategory.SelectedItem as Category).ID);
@@ -167,7 +214,6 @@ namespace QuanLyCaFeLan1
         private void cbFood_SelectedIndexChanged(object sender, EventArgs e)
         {
         }
-
         private void btnAddFood_Click(object sender, EventArgs e)
         {
             Table table = lsvBill.Tag as Table;
@@ -228,20 +274,14 @@ namespace QuanLyCaFeLan1
             LoadTable();
             }
         }
-
-        #endregion
-
-
-
-
         private void thanhToánToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             btnCheckOut_Click(this, new EventArgs());
         }
-
         private void thêmMónToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             btnAddFood_Click(this, new EventArgs());
         }
+        #endregion
     }
 }

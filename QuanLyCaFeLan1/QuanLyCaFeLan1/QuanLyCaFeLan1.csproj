@@ -33,8 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Bunifu_UI_v1.52">
+      <HintPath>C:\Users\User\Desktop\Bunifu_UI_v1.52.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -107,6 +111,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -121,7 +126,150 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\login_30px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\login_dangnhap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\login_dangnhap2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\login_exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exit2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tac1561618387.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nen_login1.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nen_login2.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\thongtintk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\admin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chucnang.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\themmon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chuyenban.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chuyenban2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chuyenban3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\discount.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\thanhtoan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\thongke.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\first.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\last.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\previous.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\next.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\themmon1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\deletex.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\show.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\next2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\previous2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\show2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\first_new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\previous_new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\next_new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\last_new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\switches_new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\discount_new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rent_new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\switches_30px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\discount_30px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\login_30px1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logout_new_30px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lock_30px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reset_30px.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

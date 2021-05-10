@@ -61,6 +61,10 @@ namespace QuanLyCaFeLan1.DAO
             int result = DataProvider.Instance.ExcuteNonQuery(query);
             return result > 0;
         }
+        public void DeleteFoodByCategoryID(int id)
+        {
+            DataProvider.Instance.ExcuteQuery("delete dbo.Food WHERE idCategory = " + id);
+        }
         public List<Food> SearchFoodByName(string name)
         {
             List<Food> list = new List<Food>();
