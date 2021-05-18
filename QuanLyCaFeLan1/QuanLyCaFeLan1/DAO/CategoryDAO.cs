@@ -10,11 +10,13 @@ namespace QuanLyCaFeLan1.DAO
     class CategoryDAO
     {
         private static CategoryDAO instance;
+      
         public static CategoryDAO Instance
         {
             get { if(instance==null)instance = new CategoryDAO();return CategoryDAO.instance; }
             private set { CategoryDAO.instance = value; }
         }
+
 
         private CategoryDAO() { }
         public List<Category> GetListCategory()
@@ -56,8 +58,6 @@ namespace QuanLyCaFeLan1.DAO
         }
         public bool DeleteCategory(int idCategory)
         {
-            FoodDAO.Instance.DeleteFoodByCategoryID(idCategory);
-           // BillInfoDAO.Instance.DeleteBillInfoByFoodID();
             string query = string.Format("Delete dbo.FoodCategory where id = {0}", idCategory);
             int result = DataProvider.Instance.ExcuteNonQuery(query);
             return result > 0;

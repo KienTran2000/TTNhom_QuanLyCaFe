@@ -237,7 +237,6 @@ namespace QuanLyCaFeLan1
             }
 
             ShowBill(table.ID);
-
             LoadTable();
         }
         private void btnCheckOut_Click(object sender, EventArgs e)

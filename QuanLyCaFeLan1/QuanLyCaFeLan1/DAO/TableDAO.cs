@@ -74,7 +74,6 @@ namespace QuanLyCaFeLan1.DAO
         }
         public bool DeleteTable(int idTable)
         {
-            //BillInfoDAO.Instance.DeleteBillInfoByFoodID(idFood);
             string query = string.Format("Delete TableFood where id = {0}", idTable);
             int result = DataProvider.Instance.ExcuteNonQuery(query);
             return result > 0;

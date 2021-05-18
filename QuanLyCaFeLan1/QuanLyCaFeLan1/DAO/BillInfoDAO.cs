@@ -26,6 +26,7 @@ namespace QuanLyCaFeLan1.DAO
                 instance = value;
             }
         }
+
         private BillInfoDAO() { }
         public void DeleteBillInfoByFoodID(int id)
         {
