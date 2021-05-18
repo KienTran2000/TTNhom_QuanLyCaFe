@@ -327,14 +327,28 @@ namespace QuanLyCaFeLan1
             string userName = txbUserName.Text;
             string displayName = txbDisplayName.Text;
             int type = (int)numericUpDown1.Value;
-
+            try
+            {
             AddAccount(userName, displayName, type);
+
+            }
+            catch
+            {
+                MessageBox.Show("Vui lòng nhập tài khoản cần thêm");
+            }
         }
 
         private void btnDeleteAccount_Click(object sender, EventArgs e)
         {
             string userName = txbUserName.Text;
+            try
+            {
             DeleteAccount(userName);
+            }
+            catch
+            {
+                MessageBox.Show("Vui lòng chọn để xóa");
+            }
         }
 
         private void btnEditAccount_Click(object sender, EventArgs e)
@@ -342,8 +356,15 @@ namespace QuanLyCaFeLan1
             string userName = txbUserName.Text;
             string displayName = txbDisplayName.Text;
             int type = (int)numericUpDown1.Value;
-
+            try
+            {
             EditAccount(userName, displayName, type);
+            }
+            catch
+            {
+                MessageBox.Show("Vui lòng chọn để sửa");
+            }
+
         }
 
         private void btnShowCategory_Click(object sender, EventArgs e)
