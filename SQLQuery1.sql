@@ -34,3 +34,12 @@ BEGIN
 END
 
 delete dbo.FoodCategory where id=6 
+create trigger DeleteTable on TableFood instead of delete
+as
+declare @MATable int
+begin
+	select @MATable=ID from deleted
+	delete BillInfo where idBill in(select id from Bill where idTable=@MATable)
+	delete Bill where idTable=@MATable
+	delete TableFood where id=@MATable
+end
