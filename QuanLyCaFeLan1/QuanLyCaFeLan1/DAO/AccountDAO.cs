@@ -64,6 +64,37 @@ namespace QuanLyCaFeLan1.DAO
             return null;
         }
 
+        // insert update delete reset password by Duy
+        // insert Duy
+        public bool InsertAccount(string name, string displayName, int type)
+        {
+            string query = string.Format("INSERT dbo.Account ( UserName, DisplayName, Type, password )VALUES  ( N'{0}', N'{1}', {2}, N'{3}')", name, displayName, type, "1962026656160185351301320480154111117132155");
+            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            return result > 0;
+        }
+        // update Duy
+        public bool UpdateAccount(string name, string displayname, int type)
+        {
+            string query = string.Format("UPDATE dbo.Account SET  DisplayName = N'{1}', Type = {2} WHERE UserName = '{0}'", name, displayname, type);
+            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            return result > 0;
+        }
+        // Delete duy
+        public bool DeleteAccount(string name)
+        {
+            string query = string.Format("Delete Account where UserName = N'{0}'", name);
+            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            return result > 0;
+        }
+
+        // reset Duy
+        public bool ResetPassword(string name)
+        {
+            string query = string.Format("Update Account set password = N'1962026656160185351301320480154111117132155' where UserName = N'{0}'", name);
+            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            return result > 0;
+        }
+
 
     }
 
