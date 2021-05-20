@@ -44,5 +44,27 @@ namespace QuanLyCaFeLan1.DAO
             }
             return category;
         }
+
+
+        // insert delete update Duy
+        public bool InsertCategory(string name)
+        {
+            string query = string.Format("Insert dbo.FoodCategory ( name)VALUES (N'{0}')", name);
+            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            return result > 0;
+        }
+        public bool UpdateCategory(int idCategory, string name)
+        {
+            string query = string.Format("UPDATE dbo.FoodCategory SET name = N'{0}' WHERE id = {1}", name, idCategory);
+            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            return result > 0;
+        }
+        public bool DeleteCategory(int idCategory)
+        {
+            string query = string.Format("Delete dbo.FoodCategory where id = {0}", idCategory);
+            int result = DataProvider.Instance.ExcuteNonQuery(query);
+            return result > 0;
+        }
+
     }
 }
